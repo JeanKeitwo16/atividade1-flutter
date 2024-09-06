@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
 
-class tela1 extends StatefulWidget {
-  const tela1({super.key});
+class minhaTela1 extends StatefulWidget {
+  const minhaTela1({super.key});
 
   @override
-  State<tela1> createState() => _tela1State();
+  State<minhaTela1> createState() => _tela1State();
 }
 
-class _tela1State extends State<tela1> {
-  bool passwordVisible=false;
-  @override 
-    void initState(){ 
-      super.initState(); 
-      passwordVisible=true; 
-    } 
+class _tela1State extends State<minhaTela1> {
+  bool passwordVisible = false;
+  final usuarioController = TextEditingController();
+  final senhaController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    passwordVisible = true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
         child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         CircleAvatar(
           radius: 40,
@@ -25,11 +30,13 @@ class _tela1State extends State<tela1> {
             "https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg",
           ),
         ),
+        SizedBox(height: 10),
         Container(
           width: 320,
           child: Column(
             children: [
               TextField(
+                controller: usuarioController,
                 //TextFieldUsuario
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -38,31 +45,49 @@ class _tela1State extends State<tela1> {
                   labelText: 'Usuário',
                 ),
               ),
-              TextField(obscureText: passwordVisible, //TextFieldUsuario
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(60),
-            ),
-            labelText: 'Senha',
-            suffixIcon: IconButton( 
-                      icon: Icon(passwordVisible 
-                          ? Icons.visibility 
-                          : Icons.visibility_off), 
-                      onPressed: () { 
-                        setState( 
-                          () { 
-                            passwordVisible = !passwordVisible; 
-                          }, 
-                        ); 
-                      }, 
-                    ),
-          ),
-        ),
+              SizedBox(height: 10),
+              TextField(
+                controller: senhaController,
+                obscureText: passwordVisible, //TextFieldUsuario
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(60),
+                  ),
+                  labelText: 'Senha',
+                  suffixIcon: IconButton(
+                    icon: Icon(passwordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off),
+                    onPressed: () {
+                      setState(
+                        () {
+                          passwordVisible = !passwordVisible;
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
         ),
+        SizedBox(height: 10),
         ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              String usuario = usuarioController.text;
+              String senha = senhaController.text;
+              if (usuario == "Jean" && senha == "jean123") {
+                print("foiii");
+              } else {
+                final snackBar = SnackBar(
+                    content: const Text("Senha incorreta!"),
+                    action: SnackBarAction(
+                      label: 'Undo',
+                      onPressed: () {},
+                    ));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+            },
             child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Text("Login", style: TextStyle(fontSize: 20.0))))
