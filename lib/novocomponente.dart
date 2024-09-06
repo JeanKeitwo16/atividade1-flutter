@@ -1,3 +1,4 @@
+import 'package:atividade1/tela2.dart';
 import 'package:flutter/material.dart';
 
 class minhaTela1 extends StatefulWidget {
@@ -77,11 +78,13 @@ class _tela1State extends State<minhaTela1> {
               String usuario = usuarioController.text;
               String senha = senhaController.text;
               if (usuario == "Jean" && senha == "jean123") {
-                print("foiii");
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return minhaTela2(usuarioNome: usuario);
+                }));
               } else {
-                final snackBar = SnackBar(
+                final snackBar = SnackBar(backgroundColor: Color.fromARGB(255, 37, 136, 123),
                     content: const Text("Senha incorreta!"),
-                    action: SnackBarAction(
+                    action: SnackBarAction(backgroundColor: Colors.white,
                       label: 'Undo',
                       onPressed: () {},
                     ));

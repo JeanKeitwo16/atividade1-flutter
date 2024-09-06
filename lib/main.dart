@@ -1,3 +1,4 @@
+import 'package:atividade1/tela2.dart';
 import 'package:flutter/material.dart';
 import 'package:atividade1/novocomponente.dart';
 
